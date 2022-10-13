@@ -42,6 +42,51 @@ namespace Lab1.Controllers
             return Ok(records);
         }
 
+        [HttpPost("users/add")]
+        public async Task<ActionResult> AddUser([FromBody] User user)
+        {
+            if (user == null)
+                return BadRequest("Cannot add new user");
+
+            if(DbContext.Users.Any(u => u.Id == user.Id))
+                return BadRequest("User with such id already exists");
+
+            DbContext.Users.Add(user);
+            return Ok("User has been created");
+        }
+
+        [HttpPost("categories/add")]
+        public async Task<ActionResult> AddCategory([FromBody] Category category)
+        {
+            if (category == null)
+                return BadRequest("Cannot add new category");
+
+            if (DbContext.Categories.Any(u => u.Id == category.Id))
+                return BadRequest("Category with such id already exists");
+
+            DbContext.Categories.Add(category);
+            return Ok("Category has been created");
+        }
+
+        [HttpPost("records/add")]
+        public async Task<ActionResult> AddRecord([FromBody] Record record)
+        {
+            if (record == null)
+                return BadRequest("Cannot create a record");
+
+            if (DbContext.Records.Any(u => u.Id == record.Id))
+                return BadRequest("Record with such id already exists");
+
+            if(!DbContext.Users.Any(u => u.Id == record.UserId))
+                return NotFound("User with such id not found");
+            
+            if(!DbContext.Categories.Any(c => c.Id == record.CategoryId))
+                return NotFound("Category with such id not found");
+
+            DbContext.Records.Add(record);
+            return Ok("Category has been created");
+        }
+
     }
 }
 
