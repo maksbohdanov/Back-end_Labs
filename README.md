@@ -13,6 +13,6 @@ Open https://localhost:5001
 * Getting a list of categories: `/lab1/categories`
 * Getting a list of records for a specific user: `/lab1/records/user/{id}`
 * Getting a list of entries in a category for a specific user: `/lab1/records/category/?userId={userId}&categoryId={categoryId}`
-*Create a user: `/lab1/users/add`
-*Create an expense category: `/lab1/categories/add`
-*Creating an expense record: `/lab1/records/add`
+* Create a user: `/lab1/users/add`
+* Create an expense category: `/lab1/categories/add`
+* Creating an expense record: `/lab1/records/add`
