@@ -84,7 +84,7 @@ namespace Lab1.Controllers
                 return NotFound("Category with such id not found");
 
             DbContext.Records.Add(record);
-            return Ok("Category has been created");
+            return Ok("Record has been added");
         }
 
     }
