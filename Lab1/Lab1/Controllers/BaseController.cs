@@ -1,9 +1,7 @@
 ﻿using Lab1.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lab1.Controllers
 {
@@ -12,17 +10,17 @@ namespace Lab1.Controllers
     public class Lab1Controller : ControllerBase
     {
         [HttpGet("categories")]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public ActionResult<IEnumerable<Category>> GetCategories()
         {
             var categories = DbContext.Categories;
-            if(categories == null)
+            if (categories == null)
                 return NotFound();
 
             return Ok(categories);
         }
 
         [HttpGet("records/user/{id}")]
-        public async Task<ActionResult<IEnumerable<Record>>> GetRecordsByUserId(int id)
+        public ActionResult<IEnumerable<Record>> GetRecordsByUserId(int id)
         {
             var records = DbContext.Records.Where(r => r.UserId == id).ToList();
             if (records.Count == 0)
@@ -32,23 +30,23 @@ namespace Lab1.Controllers
         }
 
         [HttpGet("records/category/")]
-        public async Task<ActionResult<IEnumerable<Record>>> GetRecordsByCategoryAndUserId([FromQuery]int userId, [FromQuery]int categoryId)
+        public ActionResult<IEnumerable<Record>> GetRecordsByCategoryAndUserId([FromQuery] int userId, [FromQuery] int categoryId)
         {
             var records = DbContext.Records.Where(
                 r => r.UserId == userId && r.CategoryId == categoryId).ToList();
             if (records.Count == 0)
                 return NotFound();
-                
+
             return Ok(records);
         }
 
         [HttpPost("users/add")]
-        public async Task<ActionResult> AddUser([FromBody] User user)
+        public ActionResult AddUser([FromBody] User user)
         {
             if (user == null)
                 return BadRequest("Cannot add new user");
 
-            if(DbContext.Users.Any(u => u.Id == user.Id))
+            if (DbContext.Users.Any(u => u.Id == user.Id))
                 return BadRequest("User with such id already exists");
 
             DbContext.Users.Add(user);
@@ -56,7 +54,7 @@ namespace Lab1.Controllers
         }
 
         [HttpPost("categories/add")]
-        public async Task<ActionResult> AddCategory([FromBody] Category category)
+        public ActionResult AddCategory([FromBody] Category category)
         {
             if (category == null)
                 return BadRequest("Cannot add new category");
@@ -69,7 +67,7 @@ namespace Lab1.Controllers
         }
 
         [HttpPost("records/add")]
-        public async Task<ActionResult> AddRecord([FromBody] Record record)
+        public ActionResult AddRecord([FromBody] Record record)
         {
             if (record == null)
                 return BadRequest("Cannot create a record");
@@ -77,10 +75,10 @@ namespace Lab1.Controllers
             if (DbContext.Records.Any(u => u.Id == record.Id))
                 return BadRequest("Record with such id already exists");
 
-            if(!DbContext.Users.Any(u => u.Id == record.UserId))
+            if (!DbContext.Users.Any(u => u.Id == record.UserId))
                 return NotFound("User with such id not found");
-            
-            if(!DbContext.Categories.Any(c => c.Id == record.CategoryId))
+
+            if (!DbContext.Categories.Any(c => c.Id == record.CategoryId))
                 return NotFound("Category with such id not found");
 
             DbContext.Records.Add(record);
