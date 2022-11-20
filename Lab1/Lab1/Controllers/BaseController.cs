@@ -19,18 +19,18 @@ namespace Lab1.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("records/user/{id}")]
-        public ActionResult<IEnumerable<Record>> GetRecordsByUserId(int id)
+        [HttpGet("records/user/{userId}")]
+        public ActionResult<IEnumerable<Record>> GetRecordsByUserId(int userId)
         {
-            var records = DbContext.Records.Where(r => r.UserId == id).ToList();
+            var records = DbContext.Records.Where(r => r.UserId == userId).ToList();
             if (records.Count == 0)
                 return NotFound();
 
             return Ok(records);
         }
 
-        [HttpGet("records/category/")]
-        public ActionResult<IEnumerable<Record>> GetRecordsByCategoryAndUserId([FromQuery] int userId, [FromQuery] int categoryId)
+        [HttpGet("records/user/{userId}/category/{categoryId}")]
+        public ActionResult<IEnumerable<Record>> GetRecordsByCategoryAndUserId(int userId, int categoryId)
         {
             var records = DbContext.Records.Where(
                 r => r.UserId == userId && r.CategoryId == categoryId).ToList();
@@ -84,7 +84,6 @@ namespace Lab1.Controllers
             DbContext.Records.Add(record);
             return Ok("Record has been added");
         }
-
     }
 }
 
