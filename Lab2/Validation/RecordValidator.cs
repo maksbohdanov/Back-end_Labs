@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using Lab1.Entities;
+using CostAccounting.Entities;
 
-namespace Lab1.Validation
+namespace CostAccounting.Validation
 {
     public class RecordValidator : AbstractValidator<Record>
     {

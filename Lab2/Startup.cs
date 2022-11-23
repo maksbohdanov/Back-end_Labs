@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FluentValidation.AspNetCore;
-using Lab1.Validation;
+using CostAccounting.Validation;
+using AutoMapper;
+using WebApi;
 
-namespace Lab1
+namespace CostAccounting
 {
     public class Startup
     {
@@ -33,6 +33,12 @@ namespace Lab1
 
             services.AddDbContext<CostAccountingDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            var mapperConfig = new MapperConfiguration(mc =>
+                mc.AddProfile(new AuthomapperProfile()));
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
 
         }
 

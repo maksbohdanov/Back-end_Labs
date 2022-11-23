@@ -48,7 +48,10 @@ namespace CostAccounting
                 new Category() { Id = 1, CategoryName = "Fruits", IsCustom = false },
                 new Category() { Id = 2, CategoryName = "Vegetables", IsCustom = false },
                 new Category() { Id = 3, CategoryName = "Water", IsCustom = false },
-                new Category() { Id = 4, CategoryName = "Juice", IsCustom = false }
+                new Category() { Id = 4, CategoryName = "Juice", IsCustom = false },
+                new Category() { Id = 5, CategoryName = "My Category 1", IsCustom = true, UserId = 1 },
+                new Category() { Id = 6, CategoryName = "My Category 2", IsCustom = true, UserId = 1 },
+                new Category() { Id = 7, CategoryName = "My Category 3", IsCustom = true, UserId = 2 }
             );
 
             modelBuilder.Entity<Record>().HasData(
@@ -61,7 +64,10 @@ namespace CostAccounting
                 new Record() { Id = 7, UserId = 2, CategoryId = 2, CreationTime = new DateTime(2022, 10, 5), Sum = 8 },
                 new Record() { Id = 8, UserId = 3, CategoryId = 1, CreationTime = new DateTime(2022, 10, 7), Sum = 3 },
                 new Record() { Id = 9, UserId = 3, CategoryId = 4, CreationTime = new DateTime(2022, 10, 7), Sum = 8 },
-                new Record() { Id = 10, UserId = 4, CategoryId = 3, CreationTime = new DateTime(2022, 10, 8), Sum = 3 }
+                new Record() { Id = 10, UserId = 4, CategoryId = 3, CreationTime = new DateTime(2022, 10, 8), Sum = 3 },
+                new Record() { Id = 11, UserId = 1, CategoryId = 5, CreationTime = new DateTime(2022, 10, 6), Sum = 11 },
+                new Record() { Id = 12, UserId = 1, CategoryId = 6, CreationTime = new DateTime(2022, 10, 6), Sum = 12 },
+                new Record() { Id = 13, UserId = 2, CategoryId = 7, CreationTime = new DateTime(2022, 10, 6), Sum = 10 }
            );
         }  
     }

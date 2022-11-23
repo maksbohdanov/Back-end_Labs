@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
-using Lab1.Entities;
+using CostAccounting.Entities;
 
-namespace Lab1.Validation
+namespace CostAccounting.Validation
 {
-    public class CategoryValidator : AbstractValidator<Category>
+    public class UserValidator : AbstractValidator<User>
     {
-        public CategoryValidator()
+        public UserValidator()
         {
             RuleFor(x => x.Id)
                 .NotEmpty();
 
-            RuleFor(x => x.CategoryName)
+            RuleFor(x => x.Name)
                 .NotEmpty()
                 .MaximumLength(30);
         }        

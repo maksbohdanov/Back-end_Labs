@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace CostAccounting
 {
     public class Program
     {

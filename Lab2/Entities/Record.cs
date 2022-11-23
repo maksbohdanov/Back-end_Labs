@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace CostAccounting.Entities
 {
     public class Record
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public decimal Sum { get; set; }
         public DateTime CreationTime { get; set; }
