@@ -5,7 +5,7 @@ Installed [ASP.NET Core 3.1 Runtime](https://dotnet.microsoft.com/en-us/download
 In order to download the app and run it, follow this steps:
 ```
 git clone https://github.com/maksbohdanov/Back-end_Labs
-cd Back-end_Lab1\Lab2
+cd Back-end_Labs\Lab2
 dotnet run
 ```
 Open https://localhost:5001
