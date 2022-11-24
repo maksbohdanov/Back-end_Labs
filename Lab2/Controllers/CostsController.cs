@@ -2,7 +2,6 @@
 using CostAccounting.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.Entities.DTOs;
@@ -10,6 +9,7 @@ using WebApi.Entities.DTOs;
 namespace CostAccounting.Controllers
 {
     [ApiController]
+    [Route("api")]
     public class CostsController : ControllerBase
     {
         private readonly CostAccountingDbContext _context;
@@ -29,7 +29,6 @@ namespace CostAccounting.Controllers
             var customFlag = userId != null;
             var categories = _context.Categories.Where(
                 c => userId == c.UserId && c.IsCustom == customFlag);
-           // var categories = _context.Categories.Where(x => !(x.IsCustom));
             if (categories == null)
                 return NotFound();
 
@@ -105,7 +104,7 @@ namespace CostAccounting.Controllers
             if (_context.Categories.Any(u => u.Id == category.Id))
                 return BadRequest("Category with such id already exists");
 
-            category.Id = userId;
+            category.UserId = userId;
             category.IsCustom= true;
 
             _context.Categories.Add(category);
