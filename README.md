@@ -4,15 +4,17 @@ Installed [ASP.NET Core 3.1 Runtime](https://dotnet.microsoft.com/en-us/download
 ## Getting Started
 In order to download the app and run it, follow this steps:
 ```
-git clone https://github.com/maksbohdanov/Back-end_Lab1
-cd Back-end_Lab1\Lab1\Lab1
+git clone https://github.com/maksbohdanov/Back-end_Labs
+cd Back-end_Lab1\Lab2
 dotnet run
 ```
 Open https://localhost:5001
 ### Endpoints:
-* Getting a list of categories: `/lab1/categories`
-* Getting a list of records for a specific user: `/lab1/records/user/{id}`
-* Getting a list of entries in a category for a specific user: `/lab1/records/category/?userId={userId}&categoryId={categoryId}`
-* Create a user: `/lab1/users/add`
-* Create an expense category: `/lab1/categories/add`
-* Creating an expense record: `/lab1/records/add`
+* Getting a list of categories: `api/categories`
+* Getting a list of custom categories by user : `api/categories?userId=1`
+* Getting a list of records for a specific user: `api/records/user/{id}`
+* Getting a list of entries in a category for a specific user: `api/records/user/{userId}/category/{categoryId}`
+* Create a user: `api/users/add`
+* Create an expense category: `api/categories/add`
+* Create a custom expense category: `api/users/{userId}/categories/add"`
+* Creating an expense record: `api/records/add`
