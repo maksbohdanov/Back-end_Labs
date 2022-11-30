@@ -190,7 +190,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 12,\r\n    \"userId\": 7,\r\n    \"categoryId\": 5,\r\n    \"CreationTime\": \"2022-10-12T00:00:00\",\r\n    \"sum\": 51\r\n}",
+					"raw": "{\r\n    \"id\": 13,\r\n    \"userId\": 7,\r\n    \"categoryId\": 5,\r\n    \"CreationTime\": \"2022-10-12T00:00:00\",\r\n    \"sum\": 51\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

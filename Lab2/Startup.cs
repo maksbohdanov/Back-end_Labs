@@ -32,7 +32,7 @@ namespace CostAccounting
             });
 
             services.AddDbContext<CostAccountingDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             var mapperConfig = new MapperConfiguration(mc =>
                 mc.AddProfile(new AuthomapperProfile()));
