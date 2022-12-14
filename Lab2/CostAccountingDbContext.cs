@@ -1,7 +1,6 @@
 ﻿using CostAccounting.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 
 namespace CostAccounting
 {
@@ -38,10 +37,10 @@ namespace CostAccounting
         private void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
-                new User() { Id = 1, Name = "Tom" },
-                new User() { Id = 2, Name = "Nick" },
-                new User() { Id = 3, Name = "Bob" },
-                new User() { Id = 4, Name = "Lee" }
+                new User() { Id = 1, Name = "Tom", Email = "user1@gmail.com", Password = "Password1" },
+                new User() { Id = 2, Name = "Nick", Email = "user2@gmai.com", Password = "Password2" },
+                new User() { Id = 3, Name = "Bob", Email = "user3@gmail.com", Password = "Password3" },
+                new User() { Id = 4, Name = "Lee", Email = "user4@gmail.com", Password = "Password4" }
             );
 
             modelBuilder.Entity<Category>().HasData(
