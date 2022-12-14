@@ -6,6 +6,7 @@ namespace WebApi.Entities.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
 
         public virtual ICollection<int> Records { get; set; }
         public virtual ICollection<int> Categories { get; set; }

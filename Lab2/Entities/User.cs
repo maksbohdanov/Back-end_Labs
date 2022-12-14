@@ -10,6 +10,8 @@ namespace CostAccounting.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
         public virtual ICollection<Record> Records { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
