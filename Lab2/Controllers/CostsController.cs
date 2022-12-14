@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
 using CostAccounting.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi;
 using WebApi.Entities.DTOs;
+using WebApi.Models;
 
 namespace CostAccounting.Controllers
 {
@@ -14,12 +18,52 @@ namespace CostAccounting.Controllers
     {
         private readonly CostAccountingDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public CostsController(CostAccountingDbContext context, IMapper mapper)
+
+        public CostsController(CostAccountingDbContext context, IMapper mapper, IConfiguration configuration)
         {
             _mapper= mapper;
             _context = context;
+            _configuration = configuration;
             _context.Database.EnsureCreated();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] LoginModel model)
+        {
+            if (!_context.Users.Any(x => x.Email == model.Email))
+                return NotFound("User with such email not found");
+
+            var user = _context.Users.First(x => 
+                x.Email == model.Email);
+
+            if (user.Password != model.Password)
+                return BadRequest("Wrong password.");
+
+            var token = TokenGenerator.GenerateToken(user, _configuration);
+            return Ok(token);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public ActionResult Register([FromBody] RegistrationModel model)
+        {
+            if (_context.Users.Any(x => x.Email == model.Email))
+                return BadRequest("User with such email already exists.");
+
+            var user = new User()
+            {
+                Name = model.Name,
+                Email = model.Email,
+                Password = model.Password,
+
+            };
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(Register), user);
         }
 
         [HttpGet("categories")]
@@ -66,20 +110,7 @@ namespace CostAccounting.Controllers
 
             return Ok(result);
         }
-
-        [HttpPost("users/add")]
-        public ActionResult AddUser([FromBody] User user)
-        {
-            if (user == null)
-                return BadRequest("Cannot add new user");
-
-            if (_context.Users.Any(u => u.Id == user.Id))
-                return BadRequest("User with such id already exists");
-
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return Ok("User has been created");
-        }       
+              
 
         [HttpPost("categories/add")]
         public ActionResult AddCategory([FromBody] Category category)
