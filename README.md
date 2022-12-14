@@ -10,11 +10,12 @@ dotnet run
 ```
 Open https://localhost:5001
 ### Endpoints:
+* Registration: `api/register`
+* Login: `api/login`
 * Getting a list of categories: `api/categories`
 * Getting a list of custom categories by user : `api/categories?userId=1`
 * Getting a list of records for a specific user: `api/records/user/{id}`
 * Getting a list of entries in a category for a specific user: `api/records/user/{userId}/category/{categoryId}`
-* Create a user: `api/users/add`
 * Create an expense category: `api/categories/add`
 * Create a custom expense category: `api/users/{userId}/categories/add"`
 * Creating an expense record: `api/records/add`
